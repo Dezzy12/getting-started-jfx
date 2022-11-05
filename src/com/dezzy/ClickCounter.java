@@ -42,9 +42,9 @@ public class ClickCounter extends Application {
     public void buttonClick(){
         iClickCount++;
         if (iClickCount == 1){
-            label.setText("You have clicked once.");
+            MessageBox.show("You have clicked once.", "Click!");
         }else{
-            label.setText("You have clicked " + iClickCount + " times.");
+            MessageBox.show("You have clicked " + iClickCount + " times." , "Click!");
         }
     }
 
