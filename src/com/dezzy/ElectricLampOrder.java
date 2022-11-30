@@ -147,6 +147,25 @@ public class ElectricLampOrder extends Application {
         chkLampHolder = new CheckBox("Lamp holders");
         chkScrews = new CheckBox("Screws");
 
+        //creating css properties
+        ToggleGroup groupTheme = new ToggleGroup();
+        RadioButton rdoModena =
+                new RadioButton("Modena Theme");
+        rdoModena.setToggleGroup(groupTheme);
+        rdoModena.setSelected(true);
+        rdoModena.setOnAction(e ->
+        {
+            setUserAgentStylesheet(STYLESHEET_MODENA);
+        });
+        RadioButton rdoCaspian =
+                new RadioButton("Caspian Theme");
+        rdoCaspian.setToggleGroup(groupTheme);
+        rdoCaspian.setOnAction(e ->
+        {
+            setUserAgentStylesheet(STYLESHEET_CASPIAN);
+        });
+        HBox paneTheme = new HBox(10, rdoModena, rdoCaspian);
+
         FlowPane paneOthers = new FlowPane(Orientation.VERTICAL,chkSwitch,chkCables,chkLampHolder,chkScrews);
         paneOthers.setPadding(new Insets(10,0,10,0));
         paneOthers.setHgap(20);
@@ -173,7 +192,7 @@ public class ElectricLampOrder extends Application {
         btnCancel.setOnAction(e -> btnCancel_Click());
 
         Region spacer = new Region();
-        HBox paneBottom = new HBox(10, spacer, btnOk, btnCancel);
+        HBox paneBottom = new HBox(10,paneTheme, spacer, btnOk, btnCancel);
         paneBottom.setHgrow(spacer, Priority.ALWAYS);
         paneBottom.setPadding(new Insets(20,10,20,10));
 

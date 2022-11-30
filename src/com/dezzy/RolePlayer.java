@@ -17,7 +17,7 @@ public class RolePlayer extends Application {
 
     @Override public void start (Stage stage){
         // Create the character
-        Label labelCharacter = new Label("Character's Name: ");
+        Label labelCharacter = new Label("Character's Name:");
         labelCharacter.setMinWidth(100);
         labelCharacter.setAlignment(Pos.BOTTOM_RIGHT);
 
@@ -28,7 +28,7 @@ public class RolePlayer extends Application {
         txtCharacter.setPromptText("Enter the name of the character here.");
 
         // Create the Actor label
-        Label labelActor = new Label("Actors Name: ");
+        Label labelActor = new Label("Actors Name:");
         labelActor.setMinWidth(100);
         labelActor.setAlignment(Pos.BOTTOM_RIGHT);
 
@@ -38,26 +38,31 @@ public class RolePlayer extends Application {
         txtActor.setMaxWidth(200);
         txtActor.setPromptText("Enter the name of the actor here.");
 
-        // Create the OK button
-        Button btnOK = new Button("OK");
-        btnOK.setMinWidth(75);
-        btnOK.setOnAction(e -> btnOK_Click());
+        //Create the role labels
+        Label labelRole1 = new Label("The role of ");
+        Label labelRole2 = new Label();
+        Label labelRole3 = new Label(" will be played by ");
+        Label labelRole4 = new Label();
 
         // Create the Character pane
-        HBox paneCharacter = new HBox(20,labelCharacter,txtCharacter);
+        HBox paneCharacter = new HBox(20, labelCharacter, txtCharacter);
         paneCharacter.setPadding(new Insets(10));
 
-        // Create the actor pane
-        HBox paneActor = new HBox(20, labelActor,txtActor);
+        // Create the Actor pane
+        HBox paneActor = new HBox(20, labelActor, txtActor);
         paneActor.setPadding(new Insets(10));
 
-        // Create the Button pane
-        HBox paneButton = new HBox(20, btnOK);
-        paneButton.setPadding(new Insets(10));
-        paneButton.setAlignment(Pos.BOTTOM_RIGHT);
+        // Create the Role pane
+        HBox paneRole = new HBox(labelRole1,labelRole2,labelRole3,labelRole4);
+        paneRole.setPadding(new Insets(10));
 
-        //Add the character, actor, button panes to VBox
-        VBox pane = new VBox(10,paneCharacter,paneActor, paneButton);
+        // Add the Character and Actor panes to a VBox
+        VBox pane = new VBox(10, paneCharacter,paneActor,paneRole);
+
+        // Create the bindings
+        labelRole2.textProperty().bind(txtCharacter.textProperty());
+        labelRole4.textProperty().bind(txtActor.textProperty());
+
 
         //set the stage
         Scene scene = new Scene(pane);
@@ -66,20 +71,5 @@ public class RolePlayer extends Application {
         stage.show();
 
     }
-    public void btnOK_Click(){
-        String errorMessage = "";
-        if(txtCharacter.getText().length() == 0){
-            errorMessage += "\nCharacter is a required field.";
 
-        }
-        if (txtActor.getText().length() == 0){
-            errorMessage += "\nActor is a required field.";
-        }
-        if (errorMessage.length() == 0){
-            String message = "The role of "+ txtCharacter.getText()+ " will be played by "+ txtActor.getText()+".";
-            MessageBox.show(message, "Cast");
-        }else {
-            MessageBox.show(errorMessage,"Missing Data");
-        }
-    }
 }
