@@ -54,8 +54,9 @@ public class PhotoViewer extends Application {
         }
 
         ScrollPane scroll = new ScrollPane(tile);
-        scroll.setMinWidth(920);
-        scroll.setMinHeight(450);
+        scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scroll.setFitToWidth(true);
 
 
         Scene scene = new Scene(scroll);
